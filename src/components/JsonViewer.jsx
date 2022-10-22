@@ -1,16 +1,15 @@
-// @flow
-import * as React from 'react';
+import PropTypes from 'prop-types';
 import ReactJson from 'react-json-view';
 import { JsonViewerWrapper } from './JsonViewer.style';
 
-type Props = {
-  data: Object | Array<any>,
-};
-
-const JsonViewer: React$ComponentType<Props> = ({ data }) => (
+const JsonViewer = ({ data }) => (
   <JsonViewerWrapper>
     <ReactJson src={data} />
   </JsonViewerWrapper>
 );
+
+JsonViewer.propTypes = {
+  data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+};
 
 export default JsonViewer;

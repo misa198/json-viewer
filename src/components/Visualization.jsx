@@ -1,32 +1,18 @@
-// @flow
 import { tree } from 'd3-state-visualizer';
 import * as React from 'react';
 import { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { VisualizationWrapper } from './Visualization.style';
+import PropTypes from 'prop-types';
 
-type Props = {
-  data: Object | Array<any>,
-  onClickText: Function,
-  colors: {
-    link: string,
-    text: string,
-    textHover: string,
-    parentNode: string,
-    leafNode: string,
-    tooltipBg: string,
-    tooltipText: string,
-  },
-};
+export default class Visualization extends Component {
+  renderChart;
 
-export default class Visualization extends Component<Props> {
-  renderChart: Function;
-
-  static getDerivedStateFromProps(): null {
+  static getDerivedStateFromProps() {
     return null;
   }
 
-  state: Object = {};
+  state = {};
 
   componentDidMount() {
     const { data, onClickText } = this.props;
@@ -83,13 +69,27 @@ export default class Visualization extends Component<Props> {
     this.renderChart();
   }
 
-  componentDidUpdate(): Object {
+  componentDidUpdate() {
     const { data } = this.props;
     this.renderChart(data);
     return this.state;
   }
 
-  render(): React.Node {
+  render() {
     return <VisualizationWrapper className="visualization" />;
   }
 }
+
+Visualization.propTypes = {
+  data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+  onClickText: PropTypes.func.isRequired,
+  colors: PropTypes.shape({
+    link: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    textHover: PropTypes.string.isRequired,
+    parentNode: PropTypes.string.isRequired,
+    leafNode: PropTypes.string.isRequired,
+    tooltipBg: PropTypes.string.isRequired,
+    tooltipText: PropTypes.string.isRequired,
+  }).isRequired,
+};

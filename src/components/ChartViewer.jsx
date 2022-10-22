@@ -1,9 +1,7 @@
-// @flow
-import * as React from 'react';
+import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import { ChevronRight } from 'react-feather';
-import { prepareData } from '../common/utils';
-import Visualization from './Visualization';
+import { useSelector } from 'react-redux';
 import {
   LINK_COLOR,
   NODE_LEAF_COLOR,
@@ -13,19 +11,17 @@ import {
   TEXT_COLOR,
   TEXT_HOVER_COLOR,
 } from '../common/themes';
-import { useSelector } from 'react-redux';
+import { prepareData } from '../common/utils';
 import {
   ChartViewerProgress,
   ChartViewerProgressStep,
+  ChartViewerProgressStepLabel,
   ChartViewerVisualizationContainer,
   ChartViewerWrapper,
 } from './ChartViewer.style';
+import Visualization from './Visualization';
 
-type Props = {
-  data: Object | Array<any>,
-};
-
-const ChartViewer: React$ComponentType<Props> = ({ data }) => {
+const ChartViewer = ({ data }) => {
   const allData = prepareData(data);
   const initialProgress = [
     {
@@ -37,8 +33,8 @@ const ChartViewer: React$ComponentType<Props> = ({ data }) => {
   const [renderData, setRenderData] = useState(allData);
   const [progress, setProgress] = useState(initialProgress);
   const theme = useSelector((state) => state.layout.theme);
-  const colors = useMemo(() => {
-    return {
+  const colors = useMemo(
+    () => ({
       link: LINK_COLOR[theme],
       parentNode: NODE_PARENT_COLOR[theme],
       leafNode: NODE_LEAF_COLOR[theme],
@@ -46,10 +42,11 @@ const ChartViewer: React$ComponentType<Props> = ({ data }) => {
       textHover: TEXT_HOVER_COLOR[theme],
       tooltipBg: PAPER_COLOR[theme],
       tooltipText: PAPER_TEXT_COLOR[theme],
-    };
-  }, [theme]);
+    }),
+    [theme],
+  );
 
-  const onClickText = (node: Object) => {
+  const onClickText = (node) => {
     const { id } = node;
     if (id === 'root') {
       setRenderData(allData);
@@ -88,7 +85,7 @@ const ChartViewer: React$ComponentType<Props> = ({ data }) => {
     setRenderData(newRenderData);
   };
 
-  const onClickProgress = (index: Object) => {
+  const onClickProgress = (index) => {
     const newProgress = progress.slice(1, index + 1);
     const id = ['root', ...newProgress.map((item) => item.name)].join('|');
     onClickText({ id });
@@ -98,16 +95,16 @@ const ChartViewer: React$ComponentType<Props> = ({ data }) => {
     <ChartViewerWrapper className="chart-viewer">
       <ChartViewerProgress theme={theme}>
         {progress.map((item, index) => (
-          <div key={item.name + index} className="flex items-center">
-            <ChartViewerProgressStep
+          <ChartViewerProgressStep key={item.name + index}>
+            <ChartViewerProgressStepLabel
               theme={theme}
               type="button"
               onClick={() => onClickProgress(index)}
             >
               {item.name}
-            </ChartViewerProgressStep>
+            </ChartViewerProgressStepLabel>
             {index === progress.length - 1 ? null : <ChevronRight size={14} />}
-          </div>
+          </ChartViewerProgressStep>
         ))}
       </ChartViewerProgress>
       <ChartViewerVisualizationContainer theme={theme}>
@@ -120,6 +117,10 @@ const ChartViewer: React$ComponentType<Props> = ({ data }) => {
       </ChartViewerVisualizationContainer>
     </ChartViewerWrapper>
   );
+};
+
+ChartViewer.propTypes = {
+  data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
 };
 
 export default ChartViewer;

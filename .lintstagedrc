@@ -2,7 +2,7 @@
   "*.{ts,tsx,js,jsx}": [
     "eslint --cache"
   ],
-  "styled.ts": [
+  "style.jsx": [
     "stylelint --cache"
   ]
 }

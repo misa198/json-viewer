@@ -1,4 +1,3 @@
-// @flow
 import { configureStore } from '@reduxjs/toolkit';
 import layout from './modules/layout';
 

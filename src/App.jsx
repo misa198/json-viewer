@@ -1,10 +1,9 @@
-// @flow
 import { useSelector } from 'react-redux';
 import ChartViewer from './components/ChartViewer';
 import JsonViewer from './components/JsonViewer';
 import data from './data.json';
 
-const App = (): React$Element<any> => {
+const App = () => {
   const mode = useSelector((state) => state.layout.mode);
 
   return (

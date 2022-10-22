@@ -1,4 +1,3 @@
-// @flow
 export const BACKGROUND_COLOR = {
   // dark
   apathy: 'rgb(3, 26, 22)',

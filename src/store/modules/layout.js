@@ -1,15 +1,7 @@
-// @flow
 import { createSlice } from '@reduxjs/toolkit';
 
-export type DisplayType = 'tree' | 'chart' | 'raw';
-
-type State = {
-  mode: DisplayType,
-  theme: string,
-};
-
-const initialState: State = {
-  mode: 'chart',
+const initialState = {
+  mode: 'chart', // 'json' or 'chart' or 'raw
   theme: 'apathy',
 };
 
