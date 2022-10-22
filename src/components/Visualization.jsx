@@ -1,28 +1,30 @@
+// @flow
 import { tree } from 'd3-state-visualizer';
-import React, { Component } from 'react';
+import * as React from 'react';
+import { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import './Visualization.scss';
 
-export default class Visualization extends Component {
-  constructor(props) {
-    super(props);
-  }
+type Props = {
+  data: Object | Array<any>,
+  onClickText: Function,
+};
 
-  state = {};
+export default class Visualization extends Component<Props> {
+  renderChart: Function;
 
-  static getDerivedStateFromProps() {
+  static getDerivedStateFromProps(): null {
     return null;
   }
 
-  componentDidUpdate() {
-    this.renderChart(this.props.data);
-  }
+  state: Object = {};
 
   componentDidMount() {
+    const { data, onClickText } = this.props;
     this.renderChart = tree(findDOMNode(this), {
-      state: this.props.data,
+      state: data,
       rootKeyName: 'response',
-      onClickText: this.props.onClickText,
+      onClickText: onClickText,
       size: 2000,
       aspectRatio: 0.5,
       isSorted: false,
@@ -71,7 +73,13 @@ export default class Visualization extends Component {
     this.renderChart();
   }
 
-  render() {
+  componentDidUpdate(): Object {
+    const { data } = this.props;
+    this.renderChart(data);
+    return this.state;
+  }
+
+  render(): React.Node {
     return <div className="visualization" />;
   }
 }

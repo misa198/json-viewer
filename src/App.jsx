@@ -1,7 +1,8 @@
+// @flow
 import ChartViewer from './components/ChartViewer';
 import data from './data.json';
 
-const App = () => {
+const App = (): React$Element<any> => {
   const a = [];
 
   return (

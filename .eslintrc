@@ -4,15 +4,22 @@
     "ecmaVersion": 6,
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
+    },
+    "requireConfigFile": false
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
     }
   },
   "extends": [
     "airbnb",
     "airbnb/hooks",
     "eslint-config-airbnb/whitespace",
-    "prettier"
+    "prettier",
+    "plugin:flowtype/recommended"
   ],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "flowtype"],
   "rules": {
     "import/no-unresolved": "off",
     "import/extensions": "off",
@@ -29,7 +36,8 @@
     "react/function-component-definition": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": "off",
-    "react/no-find-dom-node": "off"
+    "react/no-find-dom-node": "off",
+    "react/state-in-constructor": "off"
   },
   "env": {
     "browser": true,

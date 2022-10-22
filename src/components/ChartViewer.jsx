@@ -1,10 +1,15 @@
+// @flow
+import * as React from 'react';
 import { useState } from 'react';
 import { ChevronRight } from 'react-feather';
 import { prepareData } from '../common/utils';
-import './ChartViewer.scss';
 import Visualization from './Visualization';
 
-const ChartViewer = ({ data }) => {
+type Props = {
+  data: Object | Array<any>,
+};
+
+const ChartViewer: React$ComponentType<Props> = ({ data }) => {
   const allData = prepareData(data);
   const initialProgress = [
     {
@@ -15,7 +20,7 @@ const ChartViewer = ({ data }) => {
   const [renderData, setRenderData] = useState(allData);
   const [progress, setProgress] = useState(initialProgress);
 
-  const onClickText = (node) => {
+  const onClickText = (node: Object) => {
     const { id } = node;
     if (id === 'root') {
       setRenderData(allData);
@@ -54,7 +59,7 @@ const ChartViewer = ({ data }) => {
     setRenderData(newRenderData);
   };
 
-  const onClickProgress = (index) => {
+  const onClickProgress = (index: Object) => {
     const newProgress = progress.slice(1, index + 1);
     const id = ['root', ...newProgress.map((item) => item.name)].join('|');
     onClickText({ id });
@@ -65,12 +70,12 @@ const ChartViewer = ({ data }) => {
       <div className="rounded-md bg-slate-800 p-2 w-fit text-cyan-50 flex absolute top-2 left-2">
         {progress.map((item, index) => (
           <div key={index} className="flex items-center">
-            <span
+            <button
               className="text-sm cursor-pointer hover:text-yellow-400"
               onClick={() => onClickProgress(index)}
             >
               {item.name}
-            </span>
+            </button>
             {index === progress.length - 1 ? null : <ChevronRight size={14} />}
           </div>
         ))}
