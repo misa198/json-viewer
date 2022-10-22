@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import { PAPER_COLOR, TEXT_COLOR } from '../common/themes';
 import { ToolbarButton, ToolbarWrapper } from './ToolBar.style';
-import { changeMode } from '../store/modules/layout';
+import { changeMode, toggleModal } from '../store/modules/layout';
 
 const ToolBar = () => {
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const ToolBar = () => {
     {
       name: 'Settings',
       icon: Settings,
+      handle: () => dispatch(toggleModal()),
     },
   ];
 

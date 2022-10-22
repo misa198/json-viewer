@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { PAPER_COLOR, PAPER_TEXT_COLOR, TEXT_COLOR } from '../common/themes';
 
 export const ToolbarWrapper = styled.div.attrs((props) => props)`
-  position: absolute;
+  position: fixed;
+  width: fit-content;
   top: 8px;
   right: 8px;
   background: ${(props) => PAPER_COLOR[props.theme]};
@@ -28,7 +29,7 @@ export const ToolbarButton = styled.button.attrs((props) => props)`
   margin-bottom: 8px;
   transition: all 0.2s ease-in-out;
   filter: ${(props) =>
-    props.active ? 'brightness(2) !important;' : 'brightness(1.2);'};
+    props.active ? 'brightness(1.2) !important;' : 'brightness(1);'};
 
   &:hover {
     filter: brightness(1.4);

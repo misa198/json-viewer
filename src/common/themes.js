@@ -36,7 +36,7 @@ export const BACKGROUND_COLOR = {
   'apathy:inverted': 'rgb(255, 255, 255)',
   'bright:inverted': 'rgb(255, 255, 255)',
   'greyscale:inverted': 'rgb(255, 255, 255)',
-  'rjv-default': 'rgba(0, 0, 0, 0)',
+  'rjv-default': 'rgb(255, 255, 255)',
   'shapeshifter:inverted': 'rgb(255, 255, 255)',
   'summerfruit:inverted': 'rgb(255, 255, 255)',
 };
