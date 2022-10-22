@@ -5,6 +5,7 @@ import {
   PAPER_COLOR,
   TEXT_COLOR,
 } from '../common/themes';
+import { motion } from 'framer-motion';
 
 export const ChartViewerWrapper = styled.div``;
 
@@ -19,7 +20,7 @@ export const ChartViewerProgress = styled.div.attrs((props) => props)`
   color: ${(props) => TEXT_COLOR[props.theme]};
 `;
 
-export const ChartViewerProgressStep = styled.div`
+export const ChartViewerProgressStep = styled(motion.div)`
   display: flex;
   align-items: center;
 `;
@@ -29,7 +30,7 @@ export const ChartViewerProgressStepLabel = styled.button.attrs(
 )`
   margin: 0 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   transition: color 0.2s ease-in-out;
   background: none;
   border: none;

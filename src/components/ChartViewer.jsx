@@ -22,7 +22,7 @@ import {
 import Visualization from './Visualization';
 
 const ChartViewer = ({ data }) => {
-  const allData = prepareData(data);
+  const allData = prepareData(structuredClone(data));
   const initialProgress = [
     {
       name: 'response',
@@ -95,7 +95,12 @@ const ChartViewer = ({ data }) => {
     <ChartViewerWrapper className="chart-viewer">
       <ChartViewerProgress theme={theme}>
         {progress.map((item, index) => (
-          <ChartViewerProgressStep key={item.name + index}>
+          <ChartViewerProgressStep
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            key={item.name + index}
+          >
             <ChartViewerProgressStepLabel
               theme={theme}
               type="button"
@@ -107,6 +112,7 @@ const ChartViewer = ({ data }) => {
           </ChartViewerProgressStep>
         ))}
       </ChartViewerProgress>
+
       <ChartViewerVisualizationContainer theme={theme}>
         <Visualization
           key={theme}
