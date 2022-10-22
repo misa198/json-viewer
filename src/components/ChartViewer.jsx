@@ -1,9 +1,25 @@
 // @flow
 import * as React from 'react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ChevronRight } from 'react-feather';
 import { prepareData } from '../common/utils';
 import Visualization from './Visualization';
+import {
+  LINK_COLOR,
+  NODE_LEAF_COLOR,
+  NODE_PARENT_COLOR,
+  PAPER_COLOR,
+  PAPER_TEXT_COLOR,
+  TEXT_COLOR,
+  TEXT_HOVER_COLOR,
+} from '../common/themes';
+import { useSelector } from 'react-redux';
+import {
+  ChartViewerProgress,
+  ChartViewerProgressStep,
+  ChartViewerVisualizationContainer,
+  ChartViewerWrapper,
+} from './ChartViewer.style';
 
 type Props = {
   data: Object | Array<any>,
@@ -17,8 +33,21 @@ const ChartViewer: React$ComponentType<Props> = ({ data }) => {
       value: allData,
     },
   ];
+
   const [renderData, setRenderData] = useState(allData);
   const [progress, setProgress] = useState(initialProgress);
+  const theme = useSelector((state) => state.layout.theme);
+  const colors = useMemo(() => {
+    return {
+      link: LINK_COLOR[theme],
+      parentNode: NODE_PARENT_COLOR[theme],
+      leafNode: NODE_LEAF_COLOR[theme],
+      text: TEXT_COLOR[theme],
+      textHover: TEXT_HOVER_COLOR[theme],
+      tooltipBg: PAPER_COLOR[theme],
+      tooltipText: PAPER_TEXT_COLOR[theme],
+    };
+  }, [theme]);
 
   const onClickText = (node: Object) => {
     const { id } = node;
@@ -66,22 +95,30 @@ const ChartViewer: React$ComponentType<Props> = ({ data }) => {
   };
 
   return (
-    <div className="chart-viewer">
-      <div className="rounded-md bg-slate-800 p-2 w-fit text-cyan-50 flex absolute top-2 left-2">
+    <ChartViewerWrapper className="chart-viewer">
+      <ChartViewerProgress theme={theme}>
         {progress.map((item, index) => (
-          <div key={index} className="flex items-center">
-            <button
-              className="text-sm cursor-pointer hover:text-yellow-400"
+          <div key={item.name + index} className="flex items-center">
+            <ChartViewerProgressStep
+              theme={theme}
+              type="button"
               onClick={() => onClickProgress(index)}
             >
               {item.name}
-            </button>
+            </ChartViewerProgressStep>
             {index === progress.length - 1 ? null : <ChevronRight size={14} />}
           </div>
         ))}
-      </div>
-      <Visualization data={renderData} onClickText={onClickText} />
-    </div>
+      </ChartViewerProgress>
+      <ChartViewerVisualizationContainer theme={theme}>
+        <Visualization
+          key={theme}
+          data={renderData}
+          onClickText={onClickText}
+          colors={colors}
+        />
+      </ChartViewerVisualizationContainer>
+    </ChartViewerWrapper>
   );
 };
 

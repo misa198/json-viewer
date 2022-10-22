@@ -1,9 +1,16 @@
 // @flow
 import * as React from 'react';
+import ReactJson from 'react-json-view';
+import { JsonViewerWrapper } from './JsonViewer.style';
 
-const JsonViewer = (): React$Element<any> => {
-  const a = [];
-  return <div className="json-viewer">sdc</div>;
+type Props = {
+  data: Object | Array<any>,
 };
+
+const JsonViewer: React$ComponentType<Props> = ({ data }) => (
+  <JsonViewerWrapper>
+    <ReactJson src={data} />
+  </JsonViewerWrapper>
+);
 
 export default JsonViewer;

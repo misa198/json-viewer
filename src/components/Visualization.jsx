@@ -3,11 +3,20 @@ import { tree } from 'd3-state-visualizer';
 import * as React from 'react';
 import { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-import './Visualization.scss';
+import { VisualizationWrapper } from './Visualization.style';
 
 type Props = {
   data: Object | Array<any>,
   onClickText: Function,
+  colors: {
+    link: string,
+    text: string,
+    textHover: string,
+    parentNode: string,
+    leafNode: string,
+    tooltipBg: string,
+    tooltipText: string,
+  },
 };
 
 export default class Visualization extends Component<Props> {
@@ -21,6 +30,7 @@ export default class Visualization extends Component<Props> {
 
   componentDidMount() {
     const { data, onClickText } = this.props;
+    const { colors } = this.props;
     this.renderChart = tree(findDOMNode(this), {
       state: data,
       rootKeyName: 'response',
@@ -34,11 +44,11 @@ export default class Visualization extends Component<Props> {
         offset: { left: 30, top: 10 },
         indentationSize: 2,
         style: {
-          background: '#222',
+          background: colors.tooltipBg,
           padding: '8px',
-          color: '#4FDEE5',
+          color: colors.tooltipText,
           'border-radius': '2px',
-          'box-shadow': '0 7px 7px 0 #111',
+          'box-shadow': '0 2px 2px 0 #111',
           'font-size': '13px',
           'line-height': '1.3',
           'font-family': 'monospace',
@@ -52,20 +62,20 @@ export default class Visualization extends Component<Props> {
         node: {
           colors: {
             collapsed: 'red',
-            parent: '#01ff70',
-            default: '#1FB3D5',
+            parent: colors.parentNode,
+            default: colors.leafNode,
           },
           stroke: 'white',
         },
         text: {
           colors: {
-            default: '#A15AEC',
-            hover: '#3DAAE0',
+            default: colors.text,
+            hover: colors.textHover,
           },
           'font-size': '12px',
         },
         link: {
-          stroke: '#188E3F',
+          stroke: colors.link,
           fill: 'none',
         },
       },
@@ -80,6 +90,6 @@ export default class Visualization extends Component<Props> {
   }
 
   render(): React.Node {
-    return <div className="visualization" />;
+    return <VisualizationWrapper className="visualization" />;
   }
 }

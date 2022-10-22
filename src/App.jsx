@@ -1,13 +1,19 @@
 // @flow
+import { useSelector } from 'react-redux';
 import ChartViewer from './components/ChartViewer';
+import JsonViewer from './components/JsonViewer';
 import data from './data.json';
 
 const App = (): React$Element<any> => {
-  const a = [];
+  const mode = useSelector((state) => state.layout.mode);
 
   return (
-    <div>
-      <ChartViewer data={data} />
+    <div className="relative">
+      {mode === 'chart' ? (
+        <ChartViewer data={data} />
+      ) : (
+        <JsonViewer data={data} />
+      )}
     </div>
   );
 };
