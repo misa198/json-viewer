@@ -10,8 +10,8 @@
     "build:content": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint:es": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:style": "stylelint 'src/**/styled.ts' 'src/**/*.tsx'",
+    "lint:es": "eslint . --ext .js,.jsx",
+    "lint:style": "stylelint 'src/**/style.js' 'src/**/*.jsx'",
     "lint": "yarn lint:es && yarn lint:style",
     "ext": "node tools/build.js",
     "build": "yarn build:content && yarn ext"

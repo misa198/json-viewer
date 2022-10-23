@@ -1,5 +1,5 @@
 {
-  "*.{ts,tsx,js,jsx}": [
+  "*.{js,jsx}": [
     "eslint --cache"
   ],
   "style.jsx": [
