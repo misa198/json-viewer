@@ -10,9 +10,8 @@
     "build:content": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint:es": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:style": "stylelint 'src/**/styled.ts' 'src/**/*.tsx'",
-    "lint": "yarn lint:es && yarn lint:style",
+    "lint:es": "eslint --cache",
+    "lint": "yarn lint:es",
     "ext": "node tools/build.js",
     "build": "yarn build:content && yarn ext"
   },
@@ -75,12 +74,6 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "sass": "^1.55.0",
-    "stylelint": "^14.14.0",
-    "stylelint-a11y": "^1.2.3",
-    "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^29.0.0",
-    "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.10.0"
+    "sass": "^1.55.0"
   }
 }
