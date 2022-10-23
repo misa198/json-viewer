@@ -1,7 +1,10 @@
 const fs = require('fs-extra');
 const path = require('path');
+var AdmZip = require('adm-zip');
 const pkg = require('../package.json');
 const chrome = require('../public/platforms/manifest.chromium.json');
+
+const zip = new AdmZip();
 
 const rmOldBuild = () => {
   try {
@@ -19,7 +22,7 @@ const build = (platform) => {
   fs.mkdirSync(path.join(__dirname, '..', 'dist', platform), {
     recursive: true,
   });
-  const { version, description } = pkg;
+  const { name, version, description } = pkg;
   const manifest = {
     ...chrome,
     version,
@@ -32,6 +35,16 @@ const build = (platform) => {
   fs.outputJsonSync(
     path.join(__dirname, '..', 'dist', platform, `manifest.json`),
     manifest,
+  );
+  // zip
+  zip.addLocalFolder(path.join(__dirname, '..', 'dist', platform));
+  zip.writeZip(
+    path.join(
+      __dirname,
+      '..',
+      'dist',
+      `${name}_${platform}_${version}` + '.zip',
+    ),
   );
 };
 
