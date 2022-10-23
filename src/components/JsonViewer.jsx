@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import ReactJson from 'react-json-view';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateData } from '../store/modules/layout';
-import { JsonViewerWrapper, JsonViewerTimestamp } from './JsonViewer.style';
+import { useSelector } from 'react-redux';
+import { JsonViewerTimestamp, JsonViewerWrapper } from './JsonViewer.style';
 
-const JsonViewer = ({ data }) => {
-  const dispatch = useDispatch();
+const JsonViewer = ({ data, setData }) => {
   const time = useSelector((state) => state.layout.time);
   const theme = useSelector((state) => state.layout.theme);
   const iconStyle = useSelector((state) => state.layout.iconStyle);
@@ -26,7 +24,7 @@ const JsonViewer = ({ data }) => {
   );
 
   const onUpdateData = (e) => {
-    dispatch(updateData(e.updated_src));
+    setData(e.updated_src);
   };
 
   return (
@@ -56,6 +54,7 @@ const JsonViewer = ({ data }) => {
 
 JsonViewer.propTypes = {
   data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+  setData: PropTypes.func.isRequired,
 };
 
 export default JsonViewer;

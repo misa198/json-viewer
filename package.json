@@ -1,7 +1,7 @@
 {
   "name": "json-viewer",
   "description": "A simple JSON viewer extension for browsers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "https://github.com/misa198/json-viewer",
   "author": "Thanh Vu",
   "license": "MIT",

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { AppWrapper } from './App.style';
@@ -13,15 +14,25 @@ const App = ({ response }) => {
   const mode = useSelector((state) => state.layout.mode);
   const theme = useSelector((state) => state.layout.theme);
 
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    setData(response);
+  }, [response]);
+
   return (
     <>
       <GlobalStyle theme={theme} />
       <SettingsModal />
       <AppWrapper theme={theme}>
         <ToolBar />
-        {mode === 'chart' && <ChartViewer data={prepareData(response)} />}
-        {mode === 'raw' && <RawViewer data={response} />}
-        {mode === 'tree' && <JsonViewer data={response} />}
+        {data && (
+          <>
+            {mode === 'chart' && <ChartViewer data={prepareData(data)} />}
+            {mode === 'raw' && <RawViewer data={data} />}
+            {mode === 'tree' && <JsonViewer data={data} setData={setData} />}
+          </>
+        )}
       </AppWrapper>
     </>
   );
