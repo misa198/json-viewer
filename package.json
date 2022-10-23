@@ -1,8 +1,10 @@
 {
   "name": "json-viewer",
   "description": "A simple JSON viewer extension for browsers",
-  "private": true,
   "version": "1.0.0",
+  "repository": "https://github.com/misa198/json-viewer",
+  "author": "Thanh Vu",
+  "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
     "build:content": "react-scripts build",

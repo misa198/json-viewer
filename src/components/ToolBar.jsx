@@ -38,19 +38,21 @@ const ToolBar = () => {
   ];
 
   return (
-    <ToolbarWrapper theme={theme}>
-      {tools.map((tool) => (
-        <ToolbarButton
-          key={tool.name}
-          theme={theme}
-          active={mode === tool.name.toLowerCase()}
-          data-tip
-          data-for={tool.name}
-          onClick={tool.handle}
-        >
-          <tool.icon size={14} />
-        </ToolbarButton>
-      ))}
+    <>
+      <ToolbarWrapper theme={theme}>
+        {tools.map((tool) => (
+          <ToolbarButton
+            key={tool.name}
+            theme={theme}
+            active={mode === tool.name.toLowerCase()}
+            data-tip
+            data-for={tool.name}
+            onClick={tool.handle}
+          >
+            <tool.icon size={14} />
+          </ToolbarButton>
+        ))}
+      </ToolbarWrapper>
       {tools.map((tool) => (
         <ReactTooltip
           id={tool.name}
@@ -63,7 +65,7 @@ const ToolBar = () => {
           {tool.name}
         </ReactTooltip>
       ))}
-    </ToolbarWrapper>
+    </>
   );
 };
 

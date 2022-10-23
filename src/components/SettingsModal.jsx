@@ -55,7 +55,7 @@ const SettingsModal = () => {
       closeTimeoutMS={200}
     >
       <SettingsModalWrapper>
-        <SettingsModalTitle theme={theme}>Settings</SettingsModalTitle>
+        <SettingsModalTitle theme={theme}>Json Viewer</SettingsModalTitle>
         <SettingsModalCloseButton theme={theme} onClick={onToggleModal}>
           <X />
         </SettingsModalCloseButton>

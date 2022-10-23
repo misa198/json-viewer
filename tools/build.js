@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
 const pkg = require('../package.json');
-const firefox = require('../public/platforms/manifest.firefox.json');
 const chrome = require('../public/platforms/manifest.chromium.json');
 
 const rmOldBuild = () => {
@@ -21,9 +20,8 @@ const build = (platform) => {
     recursive: true,
   });
   const { version, description } = pkg;
-  let manifest = platform === 'firefox' ? firefox : chrome;
-  manifest = {
-    ...manifest,
+  const manifest = {
+    ...chrome,
     version,
     description,
   };
@@ -39,5 +37,4 @@ const build = (platform) => {
 
 rmOldBuild();
 rmManifest();
-build('firefox');
 build('chromium');
