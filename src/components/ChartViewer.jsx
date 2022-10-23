@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ChevronRight } from 'react-feather';
 import { useSelector } from 'react-redux';
 import {
@@ -11,7 +11,6 @@ import {
   TEXT_COLOR,
   TEXT_HOVER_COLOR,
 } from '../common/themes';
-import { prepareData } from '../common/utils';
 import {
   ChartViewerProgress,
   ChartViewerProgressStep,
@@ -22,12 +21,11 @@ import {
 import Visualization from './Visualization';
 
 const ChartViewer = ({ data }) => {
-  const allData = useMemo(() => prepareData(structuredClone(data)), [data]);
-  const [renderData, setRenderData] = useState({});
+  const [renderData, setRenderData] = useState(data);
   const [progress, setProgress] = useState([
     {
       name: 'root',
-      value: {},
+      value: data,
     },
   ]);
   const theme = useSelector((state) => state.layout.theme);
@@ -44,24 +42,14 @@ const ChartViewer = ({ data }) => {
     [theme],
   );
 
-  useEffect(() => {
-    setRenderData(allData);
-    setProgress([
-      {
-        name: 'root',
-        value: allData,
-      },
-    ]);
-  }, [allData]);
-
   const onClickText = (node) => {
     const { id } = node;
     if (id === 'root') {
-      setRenderData(allData);
+      setRenderData(data);
       setProgress([
         {
           name: 'root',
-          value: allData,
+          value: data,
         },
       ]);
       return;
@@ -71,7 +59,7 @@ const ChartViewer = ({ data }) => {
     let newProgress = [
       {
         name: 'root',
-        value: allData,
+        value: data,
       },
     ];
     let newRenderData = {};

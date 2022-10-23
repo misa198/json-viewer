@@ -14,7 +14,6 @@ const COLLAPSED = 'JSON_VIEWER_COLLAPSED';
 const COLLAPSED_LEVEL = 'JSON_VIEWER_COLLAPSED_LEVEL';
 
 const initialState = {
-  data: {},
   time: new Date().toISOString(),
   mode: localStorage.getItem(SETTING_MODE) || 'chart', // 'tree' or 'chart' or 'raw
   theme: localStorage.getItem(SETTING_THEME) || 'rjv-default',
@@ -42,9 +41,6 @@ const layoutSlice = createSlice({
     },
     toggleModal(state) {
       state.openModal = !state.openModal;
-    },
-    updateData(state, action) {
-      state.data = action.payload;
     },
     changeConfig(state, action) {
       const { key, value } = action.payload;
