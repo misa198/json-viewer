@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import data from '../../data.json';
 
 const SETTING_MODE = 'JSON_VIEWER_SETTING_MODE';
 const SETTING_THEME = 'JSON_VIEWER_SETTING_THEME';
@@ -15,7 +14,7 @@ const COLLAPSED = 'JSON_VIEWER_COLLAPSED';
 const COLLAPSED_LEVEL = 'JSON_VIEWER_COLLAPSED_LEVEL';
 
 const initialState = {
-  data,
+  data: {},
   time: new Date().toISOString(),
   mode: localStorage.getItem(SETTING_MODE) || 'chart', // 'tree' or 'chart' or 'raw
   theme: localStorage.getItem(SETTING_THEME) || 'rjv-default',

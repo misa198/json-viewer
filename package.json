@@ -1,15 +1,18 @@
 {
   "name": "json-viewer",
+  "description": "A simple JSON viewer extension for browsers",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build:content": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:es": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:style": "stylelint 'src/**/styled.ts' 'src/**/*.tsx'",
-    "lint": "yarn lint:es && yarn lint:style"
+    "lint": "yarn lint:es && yarn lint:style",
+    "ext": "node tools/build.js",
+    "build": "yarn build:content && yarn ext"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +69,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "fs-extra": "^10.1.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",

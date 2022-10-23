@@ -14,6 +14,7 @@ export const JsonViewerWrapper = styled(motion.div)`
 
     * {
       font-family: monospace !important;
+      font-size: 12px !important;
     }
   }
 `;

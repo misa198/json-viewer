@@ -19,7 +19,7 @@ export default class Visualization extends Component {
     const { colors } = this.props;
     this.renderChart = tree(findDOMNode(this), {
       state: data,
-      rootKeyName: 'response',
+      rootKeyName: 'root',
       onClickText: onClickText,
       size: 2000,
       aspectRatio: 0.5,

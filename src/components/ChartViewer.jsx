@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ChevronRight } from 'react-feather';
 import { useSelector } from 'react-redux';
 import {
@@ -22,16 +22,14 @@ import {
 import Visualization from './Visualization';
 
 const ChartViewer = ({ data }) => {
-  const allData = prepareData(structuredClone(data));
-  const initialProgress = [
+  const allData = useMemo(() => prepareData(structuredClone(data)), [data]);
+  const [renderData, setRenderData] = useState({});
+  const [progress, setProgress] = useState([
     {
-      name: 'response',
-      value: allData,
+      name: 'root',
+      value: {},
     },
-  ];
-
-  const [renderData, setRenderData] = useState(allData);
-  const [progress, setProgress] = useState(initialProgress);
+  ]);
   const theme = useSelector((state) => state.layout.theme);
   const colors = useMemo(
     () => ({
@@ -46,18 +44,33 @@ const ChartViewer = ({ data }) => {
     [theme],
   );
 
+  useEffect(() => {
+    setRenderData(allData);
+    setProgress([
+      {
+        name: 'root',
+        value: allData,
+      },
+    ]);
+  }, [allData]);
+
   const onClickText = (node) => {
     const { id } = node;
     if (id === 'root') {
       setRenderData(allData);
-      setProgress(initialProgress);
+      setProgress([
+        {
+          name: 'root',
+          value: allData,
+        },
+      ]);
       return;
     }
     const stepsFromRootNode = id.split('|');
     stepsFromRootNode.shift();
     let newProgress = [
       {
-        name: 'response',
+        name: 'root',
         value: allData,
       },
     ];
