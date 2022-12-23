@@ -60,7 +60,7 @@
     "@commitlint/cli": "17.1.2",
     "@commitlint/config-conventional": "17.1.0",
     "@types/react": "18.0.21",
-    "@types/react-dom": "18.0.6",
+    "@types/react-dom": "18.0.10",
     "adm-zip": "0.5.9",
     "autoprefixer": "10.4.12",
     "eslint": "8.22.0",
